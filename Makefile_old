@@ -1,0 +1,39 @@
+CC= cc
+
+INC=-Iinclude
+LIB=-Llib
+CFLAGS= 
+
+
+OBJS = nlp.o udp.o tlp.o ftp.o garbler.o
+FOBJS = start.o $(OBJS)
+
+all: start
+
+start : $(FOBJS)
+	$(CC) -o start $(FOBJS) $(FLAGS) -pthread
+
+start.o : start.c 
+	$(CC) -c start.c $(FLAGS) -pthread
+
+garbler.o : garbler.c
+	$(CC) -c garbler.c $(FLAGS) -pthread
+
+ftp.o : ftp.c
+	$(CC) -c ftp.c $(FLAGS) -pthread
+
+tlp.o : tlp.c
+	$(CC) -c tlp.c $(FLAGS) -pthread
+
+nlp.o : nlp.c
+	$(CC) -c nlp.c $(FLAGS) -pthread
+
+udp.o : udp.c
+	$(CC) -c udp.c $(FLAGS)
+
+clean :
+	rm udp.o garbler.o
+	rm tlp.o nlp.o ftp.o
+	rm start.o
+
+
